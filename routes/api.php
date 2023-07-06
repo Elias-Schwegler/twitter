@@ -3,6 +3,10 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TweetController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\Api\Auth\LoginController;
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -28,4 +32,8 @@ Route::get('/tweets', function (Request $request) {
 
 
 Route::get('/tweets', [TweetController::class, 'index']);
+Route::get('users/{id}', [UserController::class, 'show']);
+Route::get('users/{id}/tweets', [UserController::class, 'tweets']);
+Route::post('/login', [LoginController::class, 'login']);
+Route::middleware('auth:sanctum')->get('/auth', [LoginController::class, 'checkAuth']);
 

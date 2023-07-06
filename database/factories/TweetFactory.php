@@ -15,7 +15,7 @@ class TweetFactory extends Factory
         return [
             'user_id' => User::factory(),
             'text' => $this->faker->text(160),
-            'likes' => $this->faker->numberBetween(0, 20000),
+            'likes' => $this->faker->numberBetween(0, 200000),
             'created_at' => $this->faker->dateTimeBetween('-1 year', 'now'),
             'updated_at' => $this->faker->dateTimeBetween('-1 year', 'now'),
         ];
