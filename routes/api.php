@@ -32,8 +32,21 @@ Route::get('/tweets', function (Request $request) {
 
 
 Route::get('/tweets', [TweetController::class, 'index']);
-Route::get('users/{id}', [UserController::class, 'show']);
-Route::get('users/{id}/tweets', [UserController::class, 'tweets']);
+Route::get('/users/{user}', [UserController::class, 'show']);
+Route::get('/users/{user}/tweets', [UserController::class, 'tweets']);
 Route::post('/login', [LoginController::class, 'login']);
 Route::middleware('auth:sanctum')->get('/auth', [LoginController::class, 'checkAuth']);
+Route::middleware('auth:sanctum')->post('/logout', [LoginController::class, 'logout']);
+Route::post('/tweets/{tweet}/like', [TweetController::class, 'like']);
+Route::post('/tweets', [TweetController::class, 'store'])->middleware('auth:sanctum');
+
+Route::middleware('auth:sanctum')->group(function () {
+    Route::get('/me', [UserController::class, 'me']);
+});
+
+
+
+Route::middleware('auth:sanctum')->group(function () {
+    Route::put('/me', [UserController::class, 'updateMe']);
+});
 

@@ -6,6 +6,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\LoginUserRequest;
+use App\Http\Resources\UserResource;
+
+
 
 
 class LoginController extends Controller
@@ -31,6 +34,14 @@ class LoginController extends Controller
     {
         return new UserResource($request->user());
     }
+
+    public function logout(Request $request)
+    {
+        $request->user()->tokens()->delete();
+
+        return response()->json(['message' => 'Logged out'], 200);
+    }
+
 
 
 }
