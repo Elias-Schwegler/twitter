@@ -2,22 +2,20 @@
 
 namespace Database\Factories;
 
+use App\Models\Tweet;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-/**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Tweet>
- */
 class TweetFactory extends Factory
 {
-    /**
-     * Define the model's default state.
-     *
-     * @return array<string, mixed>
-     */
-    public function definition(): array
+    protected $model = Tweet::class;
+
+    public function definition()
     {
         return [
-            //
+            'text' => $this->faker->text(160),
+            'likes' => $this->faker->numberBetween(0, 20000),
+            'created_at' => $this->faker->dateTimeBetween('-1 year', 'now'),
+            'updated_at' => $this->faker->dateTimeBetween('-1 year', 'now'),
         ];
     }
 }
